@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GameSAA | Reaction Test</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    color:white;
+
+    background:
+    radial-gradient(
+        circle at 50% 15%,
+        #32105c,
+        transparent 35%
+    ),
+
+    radial-gradient(
+        circle at 15% 80%,
+        #073b5c,
+        transparent 35%
+    ),
+
+    #05050b;
+}
+
+
+/* HEADER */
+
+header{
+
+    height:75px;
+
+    padding:0 7%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:#090914ee;
+
+    border-bottom:1px solid #30225c;
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#a76cff;
+
+    text-shadow:
+    0 0 15px #713cff;
+}
+
+.back{
+
+    color:#aaa;
+
+    text-decoration:none;
+
+    padding:10px 18px;
+
+    border-radius:20px;
+}
+
+.back:hover{
+
+    color:white;
+
+    background:#24134d;
+}
+
+
+/* MAIN */
+
+.container{
+
+    width:min(900px,92%);
+
+    margin:45px auto;
+
+    text-align:center;
+}
+
+.title{
+
+    margin-bottom:30px;
+}
+
+.title h1{
+
+    font-size:
+    clamp(42px,8vw,70px);
+
+    text-shadow:
+    0 0 10px #9b5cff,
+    0 0 30px #6b3cff;
+}
+
+.title p{
+
+    color:#aaaabd;
+
+    margin-top:12px;
+
+    font-size:18px;
+}
+
+
+/* TEST AREA */
+
+#testArea{
+
+    height:430px;
+
+    border-radius:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    background:#151522;
+
+    border:2px solid #5637a0;
+
+    box-shadow:
+    0 0 35px #25145d;
+
+    transition:
+    background .12s,
+    border .12s,
+    box-shadow .12s;
+}
+
+#testArea.waiting{
+
+    background:#151522;
+
+    border-color:#5637a0;
+}
+
+#testArea.ready{
+
+    background:#16a85b;
+
+    border-color:#65ffae;
+
+    box-shadow:
+    0 0 50px #16a85b;
+}
+
+#testArea.too-early{
+
+    background:#671d2b;
+
+    border-color:#ff5267;
+
+    box-shadow:
+    0 0 40px #7d1c2e;
+}
+
+
+.test-content{
+
+    pointer-events:none;
+}
+
+.icon{
+
+    font-size:70px;
+
+    margin-bottom:20px;
+}
+
+#testText{
+
+    font-size:36px;
+
+    font-weight:bold;
+}
+
+#instruction{
+
+    margin-top:15px;
+
+    color:#d0d0dd;
+
+    font-size:17px;
+}
+
+
+/* RESULT */
+
+#result{
+
+    display:none;
+
+    margin-top:25px;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:#0b0b17;
+
+    border:1px solid #5637a0;
+
+    box-shadow:
+    0 0 30px #25145d;
+}
+
+.result-title{
+
+    color:#a76cff;
+
+    font-size:24px;
+
+    margin-bottom:12px;
+}
+
+.result-time{
+
+    font-size:60px;
+
+    font-weight:bold;
+
+    color:#5cdcff;
+
+    text-shadow:
+    0 0 20px #168cff;
+}
+
+.result-message{
+
+    color:#bbb;
+
+    font-size:19px;
+
+    margin:12px 0 25px;
+}
+
+.try-again{
+
+    border:0;
+
+    padding:13px 30px;
+
+    border-radius:25px;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        90deg,
+        #713cff,
+        #168cff
+    );
+
+    box-shadow:
+    0 0 20px #5030ff;
+
+    transition:.3s;
+}
+
+.try-again:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 30px #704cff;
+}
+
+
+/* FOOTER */
+
+footer{
+
+    margin-top:70px;
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#66667a;
+
+    border-top:1px solid #27204a;
+
+    background:#090914;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    #testArea{
+
+        height:350px;
+    }
+
+    #testText{
+
+        font-size:27px;
+    }
+
+    .result-time{
+
+        font-size:48px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+
+GameSAA
+
+</div>
+
+
+<a
+href="index.html#games"
+class="back">
+
+← Games
+
+</a>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="title">
+
+<h1>
+
+🎯 Reaction Test
+
+</h1>
+
+<p>
+
+Test your reaction speed.
+
+</p>
+
+</div>
+
+
+<div
+id="testArea"
+class="waiting">
+
+
+<div class="test-content">
+
+<div class="icon">
+
+🎯
+
+</div>
+
+
+<div id="testText">
+
+CLICK TO START
+
+</div>
+
+
+<div id="instruction">
+
+Click to begin. Wait for green!
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- RESULT -->
+
+<div id="result">
+
+<div class="result-title">
+
+YOUR RESULT
+
+</div>
+
+
+<div class="result-time">
+
+<span id="time">0</span> ms
+
+</div>
+
+
+<div
+class="result-message"
+id="message">
+
+</div>
+
+
+<button
+class="try-again"
+onclick="startTest()">
+
+TRY AGAIN
+
+</button>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+© 2026 GameSAA — All Rights Reserved
+
+</footer>
+
+
+<script>
+
+const testArea =
+document.getElementById("testArea");
+
+const testText =
+document.getElementById("testText");
+
+const instruction =
+document.getElementById("instruction");
+
+const result =
+document.getElementById("result");
+
+const time =
+document.getElementById("time");
+
+const message =
+document.getElementById("message");
+
+
+let state = "idle";
+
+let startTime = 0;
+
+let timer = null;
+
+
+/* START */
+
+function startTest(){
+
+    clearTimeout(timer);
+
+    result.style.display = "none";
+
+    state = "waiting";
+
+    testArea.className = "waiting";
+
+    testText.textContent = "WAIT...";
+
+    instruction.textContent =
+    "Wait for the screen to turn green!";
+
+
+    const delay =
+    Math.floor(Math.random() * 3000) + 1500;
+
+
+    timer = setTimeout(() => {
+
+        state = "ready";
+
+        testArea.className = "ready";
+
+        testText.textContent =
+        "CLICK NOW!";
+
+        instruction.textContent =
+        "GO!";
+
+        startTime =
+        performance.now();
+
+    }, delay);
+
+}
+
+
+/* CLICK */
+
+testArea.addEventListener("click", function(){
+
+    /* FIRST CLICK */
+
+    if(state === "idle"){
+
+        startTest();
+
+        return;
+
+    }
+
+
+    /* TOO EARLY */
+
+    if(state === "waiting"){
+
+        clearTimeout(timer);
+
+        state = "idle";
+
+        testArea.className =
+        "too-early";
+
+        testText.textContent =
+        "TOO EARLY!";
+
+        instruction.textContent =
+        "You clicked before the green signal.";
+
+        setTimeout(() => {
+
+            testArea.className =
+            "waiting";
+
+            testText.textContent =
+            "CLICK TO START";
+
+            instruction.textContent =
+            "Try again when you're ready.";
+
+        },1500);
+
+        return;
+
+    }
+
+
+    /* RESULT */
+
+    if(state === "ready"){
+
+        const reaction =
+        Math.round(
+            performance.now() - startTime
+        );
+
+        state = "result";
+
+        testArea.className =
+        "waiting";
+
+        testText.textContent =
+        "TEST COMPLETE!";
+
+        instruction.textContent =
+        "Your result is shown below.";
+
+        time.textContent =
+        reaction;
+
+
+        /* MESSAGE */
+
+        if(reaction < 180){
+
+            message.textContent =
+            "🔥 INSANE! You're lightning fast!";
+
+        }
+
+        else if(reaction < 250){
+
+            message.textContent =
+            "⚡ AMAZING! Very fast reaction!";
+
+        }
+
+        else if(reaction < 350){
+
+            message.textContent =
+            "😎 GREAT! That's a really good reaction!";
+
+        }
+
+        else if(reaction < 500){
+
+            message.textContent =
+            "👍 GOOD JOB! Keep practicing!";
+
+        }
+
+        else if(reaction < 700){
+
+            message.textContent =
+            "🐢 A little slow! You can do better!";
+
+        }
+
+        else{
+
+            message.textContent =
+            "🐌 Very slow! Try again and improve!";
+
+        }
+
+
+        result.style.display =
+        "block";
+
+    }
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
