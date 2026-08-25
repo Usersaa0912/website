@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>GameSAA | Gaming Zone</title>
+<title>GameSAA</title>
 
 <style>
 
@@ -19,24 +19,32 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
+
 min-height:100vh;
+
 color:white;
 
 background:
+
 radial-gradient(
-circle at 50% 15%,
+circle at 50% 10%,
 #32105c,
 transparent 35%
 ),
 
 radial-gradient(
-circle at 15% 80%,
+circle at 10% 80%,
 #073b5c,
 transparent 35%
 ),
 
 #05050b;
+
 }
 
 /* HEADER */
@@ -61,7 +69,8 @@ position:sticky;
 
 top:0;
 
-z-index:20;
+z-index:50;
+
 }
 
 .logo{
@@ -74,13 +83,17 @@ color:#a76cff;
 
 text-shadow:
 0 0 15px #713cff;
+
 }
 
 nav{
 
 display:flex;
 
-gap:10px;
+align-items:center;
+
+gap:8px;
+
 }
 
 nav a{
@@ -89,11 +102,12 @@ text-decoration:none;
 
 color:#aaa;
 
-padding:10px 18px;
+padding:10px 17px;
 
 border-radius:20px;
 
 transition:.3s;
+
 }
 
 nav a:hover{
@@ -104,9 +118,12 @@ background:#24134d;
 
 box-shadow:
 0 0 15px #43229b;
+
 }
 
-.lab-link{
+/* CPS BUTTON */
+
+.cps-link{
 
 color:#5cdcff!important;
 
@@ -114,13 +131,23 @@ border:1px solid #168cff;
 
 box-shadow:
 0 0 15px #123c63;
+
+}
+
+.cps-link:hover{
+
+background:#082c46!important;
+
+box-shadow:
+0 0 25px #168cff!important;
+
 }
 
 /* HERO */
 
 .hero{
 
-min-height:540px;
+min-height:500px;
 
 display:flex;
 
@@ -136,17 +163,18 @@ background:
 
 radial-gradient(
 circle at 50% 35%,
-#32105f 0%,
+#32105f,
 transparent 42%
 ),
 
 radial-gradient(
 circle at 20% 80%,
-#073a62 0%,
+#073a62,
 transparent 35%
 ),
 
 #07070d;
+
 }
 
 .hero h1{
@@ -163,6 +191,7 @@ text-shadow:
 0 0 30px #6b3cff,
 
 0 0 70px #342080;
+
 }
 
 .hero p{
@@ -171,107 +200,81 @@ font-size:21px;
 
 color:#aaaabd;
 
-margin:20px 0 35px;
+margin-top:20px;
+
 }
 
-.main-button{
+/* GAMES */
 
-display:inline-block;
+.games-section{
 
-padding:15px 34px;
+padding:80px 7% 100px;
 
-border-radius:30px;
-
-text-decoration:none;
-
-color:white;
-
-font-weight:bold;
-
-background:
-
-linear-gradient(
-90deg,
-#713cff,
-#168cff
-);
-
-box-shadow:
-0 0 25px #5030ff;
-
-transition:.3s;
-}
-
-.main-button:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-0 0 40px #704cff;
-}
-
-/* GAME LAB */
-
-.lab-section{
-
-padding:70px 7% 100px;
 }
 
 .section-title{
 
 text-align:center;
 
-font-size:38px;
+font-size:40px;
 
 color:#a76cff;
 
-margin-bottom:40px;
+margin-bottom:45px;
 
 text-shadow:
 0 0 15px #713cff;
+
 }
 
-.lab-card{
+.games{
 
-max-width:900px;
+max-width:1000px;
 
 margin:auto;
 
-padding:35px;
+display:grid;
 
-border-radius:25px;
+grid-template-columns:
+repeat(2,1fr);
+
+gap:25px;
+
+}
+
+/* GAME CARD */
+
+.game-card{
+
+padding:30px;
+
+border-radius:24px;
 
 background:#0b0b17ee;
 
-border:1px solid #5637a0;
+border:1px solid #302457;
 
 box-shadow:
-0 0 30px #25145d;
-
-display:flex;
-
-align-items:center;
-
-gap:35px;
+0 0 25px #1b103e;
 
 transition:.3s;
+
 }
 
-.lab-card:hover{
+.game-card:hover{
 
-transform:translateY(-7px);
+transform:translateY(-8px);
 
-border-color:#168cff;
+border-color:#684cff;
 
 box-shadow:
-0 0 40px #263d91;
+0 0 35px #43229b;
+
 }
 
-.lab-icon{
+.game-icon{
 
-min-width:160px;
-
-height:160px;
+height:180px;
 
 display:flex;
 
@@ -279,9 +282,11 @@ align-items:center;
 
 justify-content:center;
 
-font-size:80px;
+font-size:85px;
 
-border-radius:22px;
+border-radius:18px;
+
+margin-bottom:25px;
 
 background:
 
@@ -291,36 +296,31 @@ linear-gradient(
 #092f4d
 );
 
-box-shadow:
-inset 0 0 30px #28145d;
 }
 
-.lab-info{
+.game-card h2{
 
-flex:1;
-}
-
-.lab-info h2{
-
-font-size:31px;
+font-size:28px;
 
 margin-bottom:12px;
+
 }
 
-.lab-info p{
+.game-card p{
 
 color:#9999aa;
 
 line-height:1.7;
 
 margin-bottom:22px;
+
 }
 
-.open-lab{
+.play-button{
 
 display:inline-block;
 
-padding:13px 27px;
+padding:12px 25px;
 
 border-radius:25px;
 
@@ -342,32 +342,36 @@ box-shadow:
 0 0 20px #5030ff;
 
 transition:.3s;
+
 }
 
-.open-lab:hover{
+.play-button:hover{
 
 transform:translateY(-3px);
 
 box-shadow:
 0 0 30px #704cff;
+
 }
 
 /* ABOUT */
 
 .about{
 
-padding:70px 7%;
+padding:80px 7%;
 
 text-align:center;
+
 }
 
 .about h2{
 
+font-size:35px;
+
 color:#a76cff;
 
-font-size:34px;
-
 margin-bottom:20px;
+
 }
 
 .about p{
@@ -376,51 +380,42 @@ max-width:700px;
 
 margin:auto;
 
+color:#9999aa;
+
 line-height:1.8;
 
-color:#9999aa;
 }
 
 /* FOOTER */
 
 footer{
 
-text-align:center;
-
 padding:30px;
+
+text-align:center;
 
 color:#66667a;
 
 border-top:1px solid #27204a;
 
 background:#090914;
+
 }
 
 /* MOBILE */
 
-@media(max-width:650px){
+@media(max-width:700px){
 
-nav a:not(.lab-link){
+nav a:not(.cps-link){
 
 display:none;
+
 }
 
-.lab-card{
+.games{
 
-flex-direction:column;
+grid-template-columns:1fr;
 
-text-align:center;
-}
-
-.lab-icon{
-
-min-width:130px;
-
-width:130px;
-
-height:130px;
-
-font-size:65px;
 }
 
 }
@@ -433,6 +428,8 @@ font-size:65px;
 <body>
 
 
+<!-- HEADER -->
+
 <header>
 
 <div class="logo">
@@ -443,15 +440,19 @@ GameSAA
 <nav>
 
 <a
-href="lab.html"
-class="lab-link">
+href="game.html"
+class="cps-link">
 
-🧪 Game Lab
+🖱️ CPS Test
 
 </a>
 
 <a href="#home">
 Home
+</a>
+
+<a href="#games">
+Games
 </a>
 
 <a href="#about">
@@ -479,71 +480,64 @@ GameSAA
 Your gaming world starts here 🎮
 </p>
 
-<a
-href="lab.html"
-class="main-button">
-
-🧪 OPEN GAME LAB
-
-</a>
-
 </div>
 
 </section>
 
 
-<!-- GAME LAB -->
+<!-- GAMES -->
 
 <section
-class="lab-section">
+class="games-section"
+id="games">
 
 <h2
 class="section-title">
 
-🧪 Game Lab
+🎮 Games
 
 </h2>
 
 
-<div class="lab-card">
+<div class="games">
 
 
-<div class="lab-icon">
+<!-- REACTION TEST -->
 
-🧪
+<div class="game-card">
+
+<div class="game-icon">
+
+🎯
 
 </div>
 
 
-<div class="lab-info">
-
 <h2>
-Test Your Skills
+
+Reaction Test
+
 </h2>
+
 
 <p>
 
-Enter the Game Lab and challenge
-yourself with different gaming tests.
+Test your reaction speed.
 
-Currently available:
+Wait for the screen to turn green
+and click as quickly as possible.
 
-<br>
-
-🖱️ CPS Test
-
-<br>
-
-🎯 Reaction Test
+Your result will be measured
+in milliseconds.
 
 </p>
 
 
 <a
-href="lab.html"
-class="open-lab">
+href="reaction.html"
+class="play-button">
 
-ENTER GAME LAB
+PLAY NOW
 
 </a>
 
@@ -562,25 +556,30 @@ class="about"
 id="about">
 
 <h2>
+
 About GameSAA
+
 </h2>
+
 
 <p>
 
 Welcome to GameSAA! 🎮
 
 A gaming website focused on fun
-challenges and skill tests.
+games and skill tests.
 
-Enter the Game Lab, test your skills,
-beat your records and have fun.
+Test your speed, improve your skills
+and challenge yourself.
 
-More challenges will be added later.
+More games will be added in the future.
 
 </p>
 
 </section>
 
+
+<!-- FOOTER -->
 
 <footer>
 
