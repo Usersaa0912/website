@@ -47,7 +47,8 @@ transparent 35%
 
 }
 
-/* HEADER */
+
+/* ================= HEADER ================= */
 
 header{
 
@@ -121,7 +122,8 @@ box-shadow:
 
 }
 
-/* CPS BUTTON */
+
+/* CPS */
 
 .cps-link{
 
@@ -134,16 +136,22 @@ box-shadow:
 
 }
 
-.cps-link:hover{
 
-background:#082c46!important;
+/* REACTION */
+
+.reaction-link{
+
+color:#ff8cff!important;
+
+border:1px solid #9b3cff;
 
 box-shadow:
-0 0 25px #168cff!important;
+0 0 15px #421263;
 
 }
 
-/* HERO */
+
+/* ================= HERO ================= */
 
 .hero{
 
@@ -204,7 +212,8 @@ margin-top:20px;
 
 }
 
-/* GAMES */
+
+/* ================= GAMES ================= */
 
 .games-section{
 
@@ -241,6 +250,7 @@ repeat(2,1fr);
 gap:25px;
 
 }
+
 
 /* GAME CARD */
 
@@ -354,7 +364,8 @@ box-shadow:
 
 }
 
-/* ABOUT */
+
+/* ================= ABOUT ================= */
 
 .about{
 
@@ -386,7 +397,8 @@ line-height:1.8;
 
 }
 
-/* FOOTER */
+
+/* ================= FOOTER ================= */
 
 footer{
 
@@ -402,19 +414,62 @@ background:#090914;
 
 }
 
-/* MOBILE */
 
-@media(max-width:700px){
+/* ================= MOBILE ================= */
 
-nav a:not(.cps-link){
+@media(max-width:750px){
+
+nav a:not(.cps-link):not(.reaction-link){
 
 display:none;
+
+}
+
+nav{
+
+gap:5px;
+
+}
+
+nav a{
+
+padding:8px 10px;
+
+font-size:13px;
 
 }
 
 .games{
 
 grid-template-columns:1fr;
+
+}
+
+}
+
+
+/* VERY SMALL SCREEN */
+
+@media(max-width:430px){
+
+header{
+
+padding:0 4%;
+
+}
+
+.logo{
+
+font-size:22px;
+
+}
+
+.cps-link,
+.reaction-link{
+
+font-size:11px!important;
+
+padding:7px 8px!important;
 
 }
 
@@ -428,16 +483,20 @@ grid-template-columns:1fr;
 <body>
 
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 
 <header>
 
+
 <div class="logo">
+
 GameSAA
+
 </div>
 
 
 <nav>
+
 
 <a
 href="game.html"
@@ -447,49 +506,80 @@ class="cps-link">
 
 </a>
 
-<a href="#home">
-Home
+
+<a
+href="reaction.html"
+class="reaction-link">
+
+🎯 Reaction Test
+
 </a>
+
+
+<a href="#home">
+
+Home
+
+</a>
+
 
 <a href="#games">
+
 Games
+
 </a>
 
+
 <a href="#about">
+
 About
+
 </a>
+
 
 </nav>
 
 </header>
 
 
-<!-- HERO -->
+
+<!-- ================= HERO ================= -->
 
 <section
 class="hero"
 id="home">
 
+
 <div>
 
+
 <h1>
+
 GameSAA
+
 </h1>
 
+
 <p>
+
 Your gaming world starts here 🎮
+
 </p>
 
+
 </div>
+
 
 </section>
 
 
-<!-- GAMES -->
+
+<!-- ================= GAMES ================= -->
 
 <section
 class="games-section"
 id="games">
+
 
 <h2
 class="section-title">
@@ -505,6 +595,7 @@ class="section-title">
 <!-- REACTION TEST -->
 
 <div class="game-card">
+
 
 <div class="game-icon">
 
@@ -541,19 +632,23 @@ PLAY NOW
 
 </a>
 
+
 </div>
 
 
 </div>
+
 
 </section>
 
 
-<!-- ABOUT -->
+
+<!-- ================= ABOUT ================= -->
 
 <section
 class="about"
 id="about">
+
 
 <h2>
 
@@ -576,10 +671,12 @@ More games will be added in the future.
 
 </p>
 
+
 </section>
 
 
-<!-- FOOTER -->
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
