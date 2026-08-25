@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameSAA | Character Creator</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  color:white;
+  background:
+    radial-gradient(circle at 50% 20%,#30105c,transparent 35%),
+    radial-gradient(circle at 20% 80%,#073c5d,transparent 35%),
+    #05050b;
+}
+
+header{
+  height:75px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#090914ee;
+  border-bottom:1px solid #30225c;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:bold;
+  color:#a76cff;
+  text-shadow:0 0 15px #713cff;
+}
+
+.back{
+  color:#aaa;
+  text-decoration:none;
+}
+
+.back:hover{
+  color:#5cdcff;
+}
+
+.container{
+  width:min(1050px,92%);
+  margin:40px auto;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.title h1{
+  font-size:clamp(40px,7vw,65px);
+  text-shadow:0 0 15px #743cff;
+}
+
+.title p{
+  color:#aaaabd;
+  margin-top:10px;
+}
+
+.creator{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.preview{
+  min-height:560px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+
+  border:1px solid #5637a0;
+  border-radius:25px;
+
+  background:
+    radial-gradient(circle,#171044,#080812 70%);
+
+  box-shadow:
+    0 0 35px #25145d,
+    inset 0 0 50px #120b2c;
+}
+
+.avatar{
+  width:250px;
+  height:380px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.glow{
+  position:absolute;
+  width:270px;
+  height:270px;
+  border-radius:50%;
+  background:#673cff;
+  filter:blur(80px);
+  opacity:.35;
+}
+
+/* HEAD */
+
+.head{
+  position:absolute;
+  width:125px;
+  height:145px;
+  top:50px;
+  border-radius:48% 48% 45% 45%;
+  background:#c98d65;
+  border:4px solid #171724;
+  z-index:4;
+}
+
+.face{
+  position:absolute;
+  top:90px;
+  display:flex;
+  gap:38px;
+  z-index:6;
+}
+
+.eye{
+  width:10px;
+  height:15px;
+  background:#111;
+  border-radius:50%;
+}
+
+.mouth{
+  position:absolute;
+  width:35px;
+  height:12px;
+  border-bottom:4px solid #24121b;
+  border-radius:50%;
+  top:125px;
+  left:45px;
+}
+
+/* HAIR */
+
+.hair{
+  position:absolute;
+  width:135px;
+  height:65px;
+  top:40px;
+  border-radius:65% 65% 20% 20%;
+  background:#171722;
+  z-index:7;
+}
+
+.hair.blue{
+  background:#1d9dff;
+  box-shadow:0 0 15px #168cff;
+}
+
+.hair.purple{
+  background:#843cff;
+  box-shadow:0 0 15px #713cff;
+}
+
+.hair.white{
+  background:#e8eaff;
+}
+
+/* BODY */
+
+.body{
+  position:absolute;
+  width:180px;
+  height:190px;
+  top:190px;
+  border-radius:35px 35px 20px 20px;
+  background:#151527;
+  border:4px solid #171724;
+  z-index:2;
+}
+
+.body.blue{
+  background:linear-gradient(145deg,#132a48,#168cff);
+}
+
+.body.purple{
+  background:linear-gradient(145deg,#241044,#743cff);
+}
+
+.body.neon{
+  background:linear-gradient(145deg,#16162b,#8b38ff,#168cff);
+  box-shadow:0 0 25px #633cff;
+}
+
+/* ARMS */
+
+.arm{
+  position:absolute;
+  width:45px;
+  height:145px;
+  top:210px;
+  border-radius:30px;
+  background:#161625;
+  z-index:1;
+}
+
+.arm.left{
+  left:18px;
+  transform:rotate(12deg);
+}
+
+.arm.right{
+  right:18px;
+  transform:rotate(-12deg);
+}
+
+.accessory{
+  position:absolute;
+  top:105px;
+  font-size:45px;
+  z-index:10;
+}
+
+/* CONTROLS */
+
+.controls{
+  padding:30px;
+  border-radius:25px;
+  background:#0b0b17dd;
+  border:1px solid #302457;
+  box-shadow:0 0 30px #1b103e;
+}
+
+.control{
+  margin-bottom:22px;
+}
+
+.control label{
+  display:block;
+  color:#aaa;
+  margin-bottom:10px;
+}
+
+.options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.option{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid #3a2c62;
+  background:#111120;
+  color:#bbb;
+  cursor:pointer;
+}
+
+.option:hover,
+.option.active{
+  color:white;
+  border-color:#744cff;
+  background:#25144d;
+  box-shadow:0 0 12px #4320a0;
+}
+
+.save{
+  width:100%;
+  border:0;
+  padding:15px;
+  border-radius:30px;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+
+  background:linear-gradient(90deg,#713cff,#168cff);
+
+  box-shadow:0 0 25px #5030ff;
+}
+
+.save:hover{
+  transform:translateY(-3px);
+}
+
+.saved{
+  text-align:center;
+  color:#5cdcff;
+  margin-top:15px;
+  display:none;
+}
+
+@media(max-width:800px){
+
+  .creator{
+    grid-template-columns:1fr;
+  }
+
+  .preview{
+    min-height:480px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    GameSAA
+  </div>
+
+  <a href="index.html" class="back">
+    ← Back
+  </a>
+
+</header>
+
+<div class="container">
+
+  <div class="title">
+
+    <h1>CHARACTER CREATOR</h1>
+
+    <p>
+      Create your own GameSAA character 🎮
+    </p>
+
+  </div>
+
+  <div class="creator">
+
+    <!-- PREVIEW -->
+
+    <div class="preview">
+
+      <div class="avatar">
+
+        <div class="glow" id="glow"></div>
+
+        <div class="head" id="head"></div>
+
+        <div class="hair" id="hair"></div>
+
+        <div class="face">
+
+          <div class="eye"></div>
+          <div class="eye"></div>
+
+        </div>
+
+        <div class="mouth"></div>
+
+        <div class="body" id="body"></div>
+
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+
+        <div class="accessory" id="accessory"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+      <div class="control">
+
+        <label>Skin</label>
+
+        <div class="options">
+
+          <button class="option active" data-type="skin" data-value="#c98d65">
+            🟤
+          </button>
+
+          <button class="option" data-type="skin" data-value="#8d5b3d">
+            🟫
+          </button>
+
+          <button class="option" data-type="skin" data-value="#f0b98b">
+            🟠
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="control">
+
+        <label>Hair</label>
+
+        <div class="options">
+
+          <button class="option active" data-type="hair" data-value="black">
+            Black
+          </button>
+
+          <button class="option" data-type="hair" data-value="blue">
+            Neon Blue
+          </button>
+
+          <button class="option" data-type="hair" data-value="purple">
+            Purple
+          </button>
+
+          <button class="option" data-type="hair" data-value="white">
+            White
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="control">
+
+        <label>Outfit</label>
+
+        <div class="options">
+
+          <button class="option active" data-type="outfit" data-value="black">
+            Dark
+          </button>
+
+          <button class="option" data-type="outfit" data-value="blue">
+            Blue
+          </button>
+
+          <button class="option" data-type="outfit" data-value="purple">
+            Purple
+          </button>
+
+          <button class="option" data-type="outfit" data-value="neon">
+            Neon
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="control">
+
+        <label>Accessory</label>
+
+        <div class="options">
+
+          <button class="option active" data-type="accessory" data-value="">
+            None
+          </button>
+
+          <button class="option" data-type="accessory" data-value="🎧">
+            🎧
+          </button>
+
+          <button class="option" data-type="accessory" data-value="😎">
+            😎
+          </button>
+
+          <button class="option" data-type="accessory" data-value="🧢">
+            🧢
+          </button>
+
+          <button class="option" data-type="accessory" data-value="👑">
+            👑
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="control">
+
+        <label>Glow</label>
+
+        <div class="options">
+
+          <button class="option active" data-type="glow" data-value="#673cff">
+            Purple
+          </button>
+
+          <button class="option" data-type="glow" data-value="#168cff">
+            Blue
+          </button>
+
+          <button class="option" data-type="glow" data-value="#ff38d1">
+            Pink
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <button class="save" id="save">
+        💾 SAVE CHARACTER
+      </button>
+
+      <div class="saved" id="saved">
+        ✓ Character saved!
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const settings={
+  skin:"#c98d65",
+  hair:"black",
+  outfit:"black",
+  accessory:"",
+  glow:"#673cff"
+};
+
+const head=document.getElementById("head");
+const hair=document.getElementById("hair");
+const body=document.getElementById("body");
+const accessory=document.getElementById("accessory");
+const glow=document.getElementById("glow");
+
+function update(){
+
+  head.style.background=settings.skin;
+
+  hair.className="hair "+settings.hair;
+
+  body.className="body "+settings.outfit;
+
+  accessory.textContent=settings.accessory;
+
+  glow.style.background=settings.glow;
+
+}
+
+document.querySelectorAll(".option").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const type=button.dataset.type;
+    const value=button.dataset.value;
+
+    document
+      .querySelectorAll(
+        `.option[data-type="${type}"]`
+      )
+      .forEach(x=>x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    settings[type]=value;
+
+    update();
+
+  });
+
+});
+
+
+document.getElementById("save").addEventListener("click",()=>{
+
+  localStorage.setItem(
+    "gamesaaCharacter",
+    JSON.stringify(settings)
+  );
+
+  document.getElementById("saved").style.display="block";
+
+  setTimeout(()=>{
+
+    document.getElementById("saved").style.display="none";
+
+  },2500);
+
+});
+
+
+const saved=
+  localStorage.getItem("gamesaaCharacter");
+
+if(saved){
+
+  Object.assign(
+    settings,
+    JSON.parse(saved)
+  );
+
+  update();
+
+}
+
+</script>
+
+</body>
+</html>
