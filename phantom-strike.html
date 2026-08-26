@@ -170,8 +170,17 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+window.addEventListener('error', function(e){
+  var el = document.createElement('div');
+  el.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#3a0010;color:#fff;padding:14px 18px;z-index:9999;font-family:monospace;font-size:13px;line-height:1.5;border-bottom:2px solid #ff3366;';
+  el.textContent = 'Game failed to start: ' + e.message + ' (line ' + e.lineno + ')';
+  document.body.appendChild(el);
+});
 (function(){
   "use strict";
+  if (typeof THREE === 'undefined') {
+    throw new Error('Three.js did not load — check your internet connection or ad-blocker.');
+  }
 
   /* ============ Weapon definitions ============ */
   const WEAPONS = {
@@ -614,7 +623,9 @@
     document.getElementById('gameOverScreen').classList.add('hidden');
     openBuyMenu();
   }
-  document.getElementById('playBtn').addEventListener('click', startMatch);
+  document.getElementById('playBtn').addEventListener('click', function(){
+    try { startMatch(); } catch(err){ window.dispatchEvent(new ErrorEvent('error', { message: err.message })); }
+  });
   document.getElementById('restartBtn').addEventListener('click', startMatch);
 
   buildGunModel('pistol');
