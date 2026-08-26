@@ -266,6 +266,11 @@ window.addEventListener('error', function(e){
     reloading:false, speed:6.5
   };
   let totalKills=0, roundKills=0, round=1;
+  let gameState = 'start'; // start | buy | playing | roundover | over
+  let roundTimeLeft = 90;
+  let buyTimeLeft = 10;
+  let buyInterval = null;
+  let pendingBuy = 'pistol';
 
   const keys = {};
   document.addEventListener('keydown', e=>{
@@ -461,12 +466,6 @@ window.addEventListener('error', function(e){
   animate();
 
   /* ============ Round / buy flow ============ */
-  let gameState = 'start'; // start | buy | playing | roundover | over
-  let roundTimeLeft = 90;
-  let buyTimeLeft = 10;
-  let buyInterval = null;
-  let pendingBuy = 'pistol';
-
   function updateTimerDisplay(){
     const t = Math.max(0, roundTimeLeft);
     const m = Math.floor(t/60), s = Math.floor(t%60);
